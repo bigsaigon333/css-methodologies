@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../CSSMethGuide"
+	}
+],
+  "settings": {
+    "markdown.marp.exportType": "pdf",
+    "liveServer.settings.multiRootWorkspaceName": "CSSMethGuide"
+  }
+}

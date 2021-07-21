@@ -10,45 +10,34 @@ headingDivider: 2
 
 FE 동동
 
-<!-- 안녕하세요 CSS 방법론이라는 주제로 오늘 발표를 맡게 된 우아한테크코스 프론트엔드 3기 동동입니다. -->
+<!-- 안녕하세요 CSS 방법론이라는 주제로 오늘 발표를 하게 된 우아한테크코스 프론트엔드 3기 동동입니다. -->
 
 # 순서
 
-<!-- 먼저 발표의 순서는 다음과 같습니다.  -->
+1. CSS란?
+2. CSS 등장 이전/이후의 스타일링
+3. CSS의 문제점
+4. OOCSS
+5. SMACSS
+6. BEM
+7. 새로운 CSS 방법론
+
+<!-- 먼저 오늘 발표의 순서는 다음과 같습니다. -->
 
 # 1. CSS란?
 
 - HTML 또는 XML로 쓰여진 문서의 스타일을 나타내기 위해 사용되는 언어
 - HTML이나 XML의 각 요소를 꾸미는 것과 문서의 구조와 스타일(디자인)을 분리하는 것이 역할
 
-<!-- 다음 슬라이드에서 Cascading 인데, 이는 추후 슬라이드에서 자세히 설명하도록 하겠습니다.  -->
 <!-- CSS는 HTML 또는 XML로 쓰여진 문서의 스타일을 나타내기 위해 사용되는 언어로서, HTML로 표현되는 문서의 구조와 디자인적인 요소, 스타일을 분리하는 것이  CSS의 주역할입니다. -->
 
-# 2. Cascading
+# 2. CSS 등장 이전/이후의 스타일링
 
-- CSS는 Cascading Style Sheets의 약자
+<!-- CSS의 정의가 다소 딱딱하게 느껴질 수 있는데, CSS 등장 이전/이후의 스타일링 방법의 차이를 보면 다소 이해가 쉬울 것 같습니다.  -->
 
-- 여러 셀렉터가 동일한 요소를 가리키는 경우, 어떤 CSS속성값을 최종적으로 적용할지에 관한 알고리즘
+## 2-1. CSS 등장 이전
 
-- 다음 우선순위에 따라 적용할 CSS 속성값이 결정
-
-  1. 중요도: `!important` : `!important` 를 쓰면 가장 우선순위가 높다.
-
-  2. 상세도: a < b < c
-     a. 요소 셀렉터(`div`), 의사 요소(`::before`)
-     b. 클래스 셀렉터(`.class`), 속성 셀렉터(`[attr]`), 의사 클래스(`:first-child`)
-     c. ID 셀렉터(`#id`)
-
-  3. 코드 순서: 동일한 우선순위인 경우에는 나중에 정의한 항목이 적용된다
-
-  <!--  CSS는 Cascading Style Sheets의 약자입니다. Cascading 은 CSS의 특징 중 하나로서 이름에 포함된 것을 보면 알 수 있듯 CSS의 핵심입니다.
-  inline으로 style을 정의한 경우 항상 중요도가 높다. 다만 inline에 important 를 기재 하지 않은 경우에는 important로 inline 속성을 덮어씌울 수 있다. -->
-
-# 3. CSS 등장 이전/이후의 스타일링
-
-## 3-1. CSS 등장 이전
-
-각 요소의 전용 속성이나 style 속성으로 스타일을 일일이 지정
+각 요소의 전용 속성이나 `style` 속성으로 스타일을 일일이 지정
 
 ```html
 <font color="#00f"> 이 텍스트는 파란색으로 표시됩니다. </font>
@@ -58,14 +47,20 @@ FE 동동
 </p>
 ```
 
+### 문제점
+
+- 같은 스타일 요소를 여러 페이지마다 사용하면, 하나를 수정할 때마다 그만큼 반복하여 수정을 해야 한다
+- HTML은 본래 문서 구조를 의미하므로 HTML에 직접 스타일을 지정하는 것은 바람직하지 않다
+
 <!--
- CSS가 등장하기 이전에는  각 요소의 전용 속성이나 style속성으로 스타일을 일일이 지정하여야 했습니다.
- font 요소는 deprecated되어 사용이 권장되지 않습니다만, 예시를 위하여 사용하였습니다.
- font 요소의 color 속성에 hex 코드를 넣어 font에 색상 스타일을 부여하거나 각 요소의 style 속성에   스타일을 부여하여야 했습니다.
-이러한 방법은, 같은 스타일 요소를 여러 페이지마다 사용하려면 그만큼 반복해야 한다는 문제점과,  HTML이나 XML은 본래 문서 구조를 의미하므로 HTML에 직접 스타일을 지정하는 것은 바람직하지 않다는 문제점이 있습니다.
+ CSS가 등장하기 이전에는 각 HTML 요소의 전용 속성이나 style속성으로 스타일을 일일이 지정하여야 했습니다.
+ 예를 들어, font 요소의 color 속성에 hex 코드를 넣어 색상 스타일을 부여하거나 각 요소의 style 속성에 직접 스타일을 기재하여야 했습니다.
+이러한 방법은, 같은 스타일 요소를 여러 페이지마다 사용하면, 하나를 수정할 때마다 그만큼 반복하여 수정을 해야 한다는 문제점과,
+HTML은 본래 문서 구조를 의미하므로 HTML에 직접 스타일을 지정하는 것은 바람직하지 않다는 문제점이 있습니다.
+
  -->
 
-## 3-2. CSS 등장 이후
+## 2-2. CSS 등장 이후
 
 ```css
 /* index.css */
@@ -82,27 +77,31 @@ p {
 <p>이 텍스트는 18px 의 빨간 문자로 표시됩니다</p>
 ```
 
-<!--  css 등장 이후에는 css 파일에는 스타일을 기재하고 html에는 문서의 구조를 작성하여, 관심사의 분리가 이루어지게 되었습니다. 또한, css는 기본적으로 전역 범위이므로 한 번 p 요소에 스타일링을 부여하면 여러 페이지에서도 동일하게 적용되므로, 반복을 피할 수 있게 되었습니다. -->
+<!--  css 등장 이후에는 css 파일에는 스타일을 기재하고 html에는 문서의 구조를 작성하므로, 관심사의 분리가 이루어지게 되었습니다. 또한, css는 기본적으로 전역 범위이므로 한 번 p 요소에 스타일링을 부여하면 여러 페이지에서도 동일하게 적용되므로, 만약 수정을 하는 경우에도 한곳만 수정하면 여러 페이지에도 수정된 내용이 적용되므로 반복수정을 피할 수 있게 되었습니다. -->
 
-# 4.CSS의 문제점
+# 3.CSS의 문제점
 
-- CSS에서는 모든 것이 전역 범위이므로, 모든 스타일링이 서로 간섭할 가능성이 있다.
+- CSS에서는 모든 것이 전역 범위이므로, 모든 스타일링이 서로 간섭할 가능성이 있다
 
-- CSS파일이 분리되어 있다 하더라도 이 파일들을 읽어 들인 HTML/XML 에서는 모든 스타일링이 동일한 범위 안에 존재하게 된다.
+- CSS파일이 분리되어 있다 하더라도 이 파일들을 읽어 들인 HTML 에서는 모든 스타일링이 동일한 범위 안에 존재하게 된다
 
 - 웹사이트가 점점 복잡해지면서 유지보수가 용이한 CSS 를 작성하는 것이 어려워졌고, 이를 해결하기 위한 CSS 방법론이 여러 가지 대두되었다.
 
-<!-- CSS가 등장한 시절에는 지금과 같이 복잡한 웹사이트가 없었습니다. 일관된 스타일을 유지하기 위해 상위에서 정의한 색상, 글꼴, 사이즈, 너비, 레이아웃 등이 상속되는 것은 매우 효과적인 방법이었을 것입니다.
+<!--
+CSS 의 등장으로 마치 문제가 모두 해결된 듯 싶었습니다. 그러나 ‘문서 구조와 스타일을 분리한다’는 점에 있어서는 확실히 성공했지만, 막상 현실에서는 다른 문제가 나타났습니다. 그 문제는 ‘페이지 수가 늘어남에 따라 CSS 가 점점 복잡해지고 관리하기 어렵다’ 는 점이었습니다
+
 
 -->
 
-# 5. OOCSS
+# 4. OOCSS
 
-<!-- 첫번째로 말씀드릴 CSS방법론은 OOCSS 입니다. -->
+<!-- 먼저, 첫번째로 말씀드릴 CSS방법론은 OOCSS 입니다. -->
 
-## 5-1. OOCSS란
+## 4-1. OOCSS란
 
 - Object Oriented CSS: 객체 지향 CSS
+- 니콜 설리번(Nicole Sullivan)이 제창
+- 주요 발상
 
   1. 레고처럼 자유로운 조합이 가능한 모듈의 집합을 만든다
   2. 그 모듈을 조합해 페이지를 만든다.
@@ -114,11 +113,12 @@ p {
   2. 컨테이너와 콘텐츠 분리
 
 <!--
-위와 같은 발상으로 제창된 OOCSS 는 다른 CSS 설계 기법에도 조금씩 영향을 주었습니다.
+OOCSS는 Object Oriented CSS의 약자로, 객체 지향 CSS를 나타내며
+OOCSS는 다음과 같은 발상으로 제창되었습니다.
 
 이 레고와 같은 모듈을 구현하기 위한 구체적인 수법으로 다음 두 가지 원칙을 들 수 있습니다. -->
 
-## 6-2. 스트럭처(구조)와 스킨(화면) 분리
+## 4-2. 스트럭처(구조)와 스킨(화면) 분리
 
 ### 스트럭처와 스킨 분리 전
 
@@ -130,6 +130,8 @@ p {
   <button class="btn-cancel">취소 버튼</button>
 </main>
 ```
+
+<!-- 먼저 다음과 같은 2개의 버튼을 예시로 들어보겠습니다. -->
 
 ---
 
@@ -165,13 +167,16 @@ p {
 }
 ```
 
-<!--
-스트럭처에 해당하는 속성은 크게 다음과 같습니다.
+<!-- 각 버튼을 나타내기 위한 CSS를 작성해본다면 이렇게 될 것입니다.
+
+일반적으로 스트럭처에 해당하는 속성은
 
 - width
 - height
 - padding
 - margin
+
+등 입니다.
 
 스킨에 해당하는 속성은 크게 다음과 같습니다.
 
@@ -181,8 +186,9 @@ p {
 - box-shadow
 - text-shadow
 
-위와 같이 구분할 수 있지만 OOCSS 에서는 명확하게 결정되어 있는 것은 아닙니다. 이 부분은
-너무 이론에 얽매이지 말고 경우에 따라 적절하게 분류하는 방법을 사용해도 무방합니다
+위와 같이 구분할 수 있지만 OOCSS 에서는 명확하게 결정되어 있는 것은 아닙니다.
+
+기본 버튼과 취소 버튼에 대한 css를 보면 공통적인 부분이 굉장히 많은 것이 보이실 것입니다.
 
 따라서 공통적인 부분을 스트럭처에 해당한다고 보고, 기본 버튼과 취소 버튼이 서로 다른 backgroundColor 와 color를 스킨으로 보고 이를 분리해보도록 하겠습니다.
  -->
@@ -209,19 +215,20 @@ p {
   background-color: rgb(243, 244, 246);
   color: black;
 }
-
-#main .danger {
-  background-color: rgb(176, 0, 32);
-  color: white;
-}
 ```
 
 <!--
-공통된 부분을 스트럭처로 제외를 하고, 각 버튼마다 다른 부분인 color와 background-color를 스킨으로 분리하였습니다.
+공통된 부분을 스트럭처로 분리하고, 각 버튼마다 다른 부분인 color와 background-color를 스킨으로 분리하였습니다.
+
+보기에는 확실히 깔끔해진 것 같습니다. 그럼 유지보수시에는 어떤 이점이 있을까요?
+
+
 
  -->
 
 ---
+
+### 위험 버튼 추가
 
 ![스트럭처와 스킨 분리 후](assets/img/oocss-2.png)
 
@@ -240,10 +247,12 @@ p {
 }
 ```
 
-<!--
-위험 버튼을 추가할 때에는 background-color와 color를 지정한 danger 클래스만 추가하면 간단하게 만들 수 있습니다. -->
+<!-- 유지보수중 배경색이 빨간색이고 글자색이 하얀색인 위험 버튼을 추가해야 하는 상황이 되었습니다. 기존에 스트럭처와 스킨을 분리하기 이전에는 위험 버튼에 대한 모든 css 속성을 정의하였어야 하나, 스트럭처와 스킨을 분리한 이후에는
+공통된 속성이 정의된 btn 스트럭처를 그대로 사용하며 danger 클래스를 추가하여 새로운 css속성만을 정의하여 위험 버튼을 구현할 수 있습니다.
 
-## 6-4. 컨테이너와 콘텐츠 분리
+즉 중복을 피하면서 간단하게 위험 버튼을 추가할 수 있습니다. -->
+
+## 4-3. 컨테이너와 콘텐츠 분리
 
 - 특정한 콘텍스트에 지나치게 의존하지 않는다.
 - 컨테이너는 '영역', 콘텐츠는 '모듈'
@@ -263,7 +272,9 @@ p {
 ---
 
 <!--
-컨테이너는 대략 ‘영역’, 콘텐츠는 바로 앞절에서 본 ‘버튼’ 모듈을 의미합니다. 예를 들어, 바로 앞의 예시에서는 버튼 모듈은 id 속성에 ‘ main ’이 지정된 main 요소, 컨테이너 안에 포함되어 있습니다  이 상태에서는 버튼을 main 밖에서 사용하려 해도 그럴 수 없습니다. 이 문제에 대한 해결 방법은 매우 간단합니다.
+다음으로 컨테이너와 콘텐츠 분리에 대해 알아보겠습니다.
+컨테이너는 ‘영역’, 콘텐츠는 '모듈'을 의미합니다. 바로 앞의 예시에서는 버튼 모듈은 id 속성에 ‘ main ’이 지정된 main 요소가 컨테이너, 버튼이 모듈에 해당합니다.
+버튼 모듈은 메인 컨테이너 안에 포함되어 있어, 버튼을 main 밖에서 사용하려 해도 그럴 수 없습니다. 이 문제에 대한 해결 방법은 매우 간단합니다.
  -->
 
 ```css
@@ -290,27 +301,31 @@ p {
 }
 ```
 
-<!-- 버튼 모듈을 main 밖에서도 동작하도록 CSS 셀렉터를 수정합니다. 컨테이너와 콘덴츠의 분리라는 것은 다시 말해 ‘모듈을 가능한 특정한 영역에 의존하지
+<!-- 버튼 모듈을 main 밖에서도 동작하도록 CSS 셀렉터를 수정하는 것입니다. 컨테이너와 콘덴츠의 분리라는 것은 다시 말해 ‘모듈을 가능한 특정한 영역에 의존하지
 않도록 한다’는 지침을 의미합니다 -->
 
-## 6-5. OOCSS 정리
+## 4-4. OOCSS 정리
 
 - OOCSS의 역사는 매우 길며 명확하게 규칙이라고 불리는 것도 많지 않다
 
-- 다른 CSS 방법론들은 기본적으로 크건 작건 OOCSS를 참조하면서 개선한 것
-
 - 오늘날 OOCSS 한 가지만으로 실질적인 CSS 설계를 수행하는 것은 그다지 현실적이지 않음
 
-  <!-- (공식 사이트를 보면 알 수 있지만 설명도 매우 간략합니다). -->
-  <!--
-  오늘날 OOCSS 한 가지만으로 실질적인 CSS 설계를 수행하는 것은 그다지 현실적이지 않습니다.
-  그러나 10년 전 제창한 사고방식이 다른 CSS 설계 기법에 녹아들어，지금까지도 사용되는 것을 생각하면 OOCSS 가 표방했던 사고는 CSS 설계에 있어 ‘하나의 진리’라고 해도 과언이 아니
-  라고 생각합니다. OOCSS 는 CSS 설계의 기초 중의 기초이므로 이 내용들을 꼭 기억해 두시기 바랍니다.
-   -->
+- 다른 CSS 방법론들은 기본적으로 크건 작건 OOCSS를 참조하면서 개선한 것
 
-# 7. SMACSS
+<!--
+OOCSS의 역사는 매우 길며 명확하게 규칙이라고 불리는 것도 많지 않습니다.
+공식 사이트를 보면 알 수 있지만 설명도 매우 간략합니다.
 
-## 7-1. SMACSS란?
+오늘날 OOCSS 한 가지만으로 실질적인 CSS 설계를 수행하는 것은 그다지 현실적이지 않습니다.
+
+다만 10년 전 제창한 사고방식이 다른 CSS 설계 기법에 녹아들어 지금까지도 사용되는 것을 생각한다면, OOCSS가 표방한 사고는 CSS 설계에 있어 '하나의 진리'라고 해도 과언이 아니라고 생각됩니다.
+ -->
+
+# 5. SMACSS
+
+<!-- 다음 말씀드릴 CSS 방법론은 스맥스입니다. -->
+
+## 5-1. SMACSS란?
 
 - Scalable and Modular Architecture for CSS
 - 조나단 스눅 (Jonathan Snook)이 제창
@@ -323,12 +338,14 @@ p {
   5. 테마(Theme)
 
 <!--
-SMACSS는 Scalable and Modular ARchitecture for CSS의 머리글자로서, CSS를 위한 확장 가능한 모듈 아키텍쳐라는 뜻으로 '스맥스'라고 발음합니다.
-앞장에서 다룬 OOCSS 내용은 SMACSS의 모듈과 거의 비슷합니다.
+SMACSS는 Scalable and Modular Architecture for CSS의 머리글자로서, CSS를 위한 확장 가능한 모듈 아키텍쳐라는 뜻으로 '스맥스'라고 발음합니다.
+
+CSS코드를 그 역할에 따라 아래와 같이 5가지로 분류한 것이 큰 특징입니다.
+
 OOCSS는 SMACSS를 기준으로 보았을 때 거의 모듈만 언급했던 것에 비해 SMACSS는 보다 폭넓고 실제로 웹사이트를 구축하는 데 있어 빼놓을 수 없는 베이스나 레이아웃 코드를 다루는 방법까지 설명하고 있습니다.
  -->
 
-## 7-2. 베이스(Base) 규칙
+## 5-2. 베이스(Base) 규칙
 
 - 프로젝트의 표준 스타일을 정의
 - 리셋 CSS도 베이스 규칙에 포함됨
@@ -345,10 +362,12 @@ a:hover {
 
 <!-- 베이스 규칙은 프로젝트의 표준 스타일을 정의하는 코드 규칙입니다. 베이스에 해당하는 규칙은 바탕화면 색깔 등 프로젝트 전반에 적용되는 스타일링입니다. 또한, 브라우저간 차이를 제거하기 위해 사용되는 리셋 CSS, 노멀라이즈 CSS 도 SMACSS 기준 베이스 규칙에 해당합니다. -->
 
-## 7-3. 레이아웃(Layout) 규칙
+## 5-3. 레이아웃(Layout) 규칙
 
-- 헤더나 메인 영역，사이드 바，푸터 등 웹사이트의 레이아웃을 구성하는 큰 모듈에 관한 규칙
-- ID 셀렉터를 활용한 스타일링을 허용
+- 헤더, 메인 영역，사이드 바 등 웹사이트의 레이아웃을 구성하는 큰 모듈에 관한 규칙
+
+- 대부분 특정 페이지에서 한 차례만 사용하므로 ID 셀렉터를 활용한 스타일링을 허용
+
 - 반복적으로 사용하는 모듈의 경우에는 클래스 셀렉터를 이용
 
 ```html
@@ -363,13 +382,46 @@ a:hover {
 <footer id="footer">This is Footer</footer>
 ```
 
-<!-- 레이아웃을 구성하는 것의 대부분은 특정 페이지에서 한 차례만 사용되는 것이 많으므로, ID 셀렉터를 허용합니다.
+<!-- 다음은 레이아웃 규칙입니다. 레이아웃 규칙은 헤더나 메인 영역, 사이드 바, 푸터 등 웹사이트의 레이아웃을 구성하는 큰 모듈에 관한 규칙입니다.
+레이아웃을 구성하는 것의 대부분은 특정 페이지에서 한 차례만 사용되는 것이 많으므로, ID 셀렉터를 허용합니다.
 
 레이아웃과 관련해서 반복적으로 사용하는 모듈의 경우에는 클래스 셀렉터를 이용합니다.-->
 
 ---
 
-### 특정한 상황에서만 레이아웃을 변경하고 싶은 경우
+```css
+/* ID 셀렉터 예시*/
+#header {
+  width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+}
+
+#main {
+  width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+}
+
+#footer {
+  width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #eee;
+}
+
+/* 클래스 셀렉터 예시 */
+.section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+```
+
+---
+
+### 특정한 페이지에서만 레이아웃을 변경하고 싶은 경우
 
 - 손자 셀렉터를 이용해 레이아웃 모듈의 스타일을 덮어씀
 
@@ -390,43 +442,75 @@ a:hover {
 ```
 
 <!--
-예를 들어, ‘특정한 페이지에서는 가로 폭을 좁히고 싶은 경우에는 손자 셀렉터를 이용해 레이아웃 모듈의 스타일을 덮어쓸 수 있습니다. 다음 코드에서는 body 요소에 .l-narrow 클래스를 붙여서 손자 셀렉터를 사용해 헤더，메인 영역, 푸터의 가로 폭을 좁혔습니다 -->
+만약 특정한 페이지에서만 레이아웃을 변경하고 싶으면 어떻게 해야 할까요?
 
-## 7-4. 모듈(Module) 규칙
+예를 들어, ‘특정한 페이지에서는 가로 폭을 좁히고 싶은 경우', SMACSS에서는 손자 셀렉터를 이용해 레이아웃 모듈의 스타일을 덮어쓸 것을 권장하고 있습니다. 다음 코드에서는 body element에 l-narrow 클래스를 붙인 후 각 레이아웃 모듈에 대한 손자 셀렉터를 사용해 헤더，메인 영역, 푸터의 가로 폭을 좁힐 수 있습니다.-->
+
+## 5-4. 모듈(Module) 규칙
+
+- 타이틀(Title), 버튼(Button), 카드(Card), 내비게이션(Navigation) 등
 
 - 모든 모듈은 레이아웃 규칙 안에 배치되는 것을 가정
 
 - 다른 페이지로 이동하거나 다른 레이아웃 안에 삽입하더라도 형태가 부서지거나 달라지지 않고 사용할 수 있어야 함
 
+  <!--
+  다음은 모듈 규칙입니다. 모듈은 타이틀, 버튼, 카드, 내비게이션 등 일반적인 UI 컴포넌트를 나타냅니다.
+  모든 모듈은 레이아웃 규칙 안에 배치되는 것을 가정합니다. 다른 페이지로 이동하거나 다른 레이아웃 안에 삽입하더라도 형태가 부서지거나 달라지지 않고 사용할 수 있어야 합니다. 따라서 모듈 규칙을 작성할 때에는 다른 레이아웃으로 이동했을 때 영향이 없는가를 고려하여야 합니다. 즉, 특정한 콘텍스트에 지나치게 의존하지 않도록 작성하여야 합니다.
+  -->
+
+---
+
 - 모듈의 루트 요소에는 반드시 클래스 셀렉터를 사용
-  - 가급적 요소형 셀렉터를 사용하지 않음(HTML과 스타일링을 느슨하게 결합)
-  - 요소형 셀렉터를 쓰는 경우 자녀 셀렉터(>) 사용
+
+```html
+<div class="media">
+  <figure>
+    <p>무야호~</p>
+    <!-- 생략 -->
+  </figure>
+</div>
+```
+
+```css
+.media {
+}
+
+/* ❌ 손자 셀렉터 .media figure  */
+/* ✅ 자녀 셀렉터 .media > figure */
+.media > figure {
+}
+```
 
 <!--
-- 다른 페이지로 이동하거나 다른 레이아웃 안에 삽입하더라도 형태가 부서지거나 달라지지 않고 사용할 수 있어야 합니다. 따라서 모듈 규칙을 작성할 때에는 다른 레이아웃으로 이동했을 때 영향이 없는가를 고려하여야 합니다. 즉, 특정한 콘텍스트에 지나치게 의존하지 않도록 작성하여야 합니다.
+또한 모듈은 한 페이지 내에서 반복해서 사용되는 상황을 가정하고 있으므로 당연히 ID 셀렉터를 이용한 구현은 하지 않으며. 모듈의 루트 요소에는 반드시 클래스 셀렉터를 사용합니다.
 
-또한 모듈은 한 페이지 내에서 반복해서 사용되는 상황을 가정하고 있으므로 당연히 ID 셀렉터에서의 구현은 하지 않으며. 모듈의 루트 요소에는 반드시 클래스 셀렉터 (HTML 에서는 클래스 속성)를 사용합니다.
-
-- 가급적 요소형 셀렉터를 사용하지 않는다.
-  -> HTML과 스타일링을 느슨하게 결합한다
-  - 요소형 셀렉터를 쓰는 경우 손자 셀렉터가 아닌 자녀 셀렉터(>)를 사용하여 영향 범위를 지나치게 넓히지 않는다.
+모듈의 하위 요소에는 요소형 셀렉터를 사용할 수 있으나, HTML과 스타일링을 느슨하게 결합하기 위해서 가급적 요소형 셀렉터를 사용하지 않을 것은 권장하고 있습니다.
+ 만약 요소형 셀렉터를 사용하는 경우, 손자 셀렉터가 아닌 자녀 셀렉터(>)를 사용하여 영향 범위를 지나치게 넓히지 않아야 합니다.
  -->
 
-## 7-5. 스테이트(State) 규칙
-
-![SMACSS 스테이트](assets/img/smacss-state-01.png)
+## 5-5. 스테이트(State) 규칙
 
 - 기존 스타일을 덮어쓰거나 확장하기 위해 사용
 - 자바스크립트에 의존한다
+  ![SMACSS 스테이트](assets/img/smacss-state-01.png)
 - 스테이트는 레이아웃이나 모듈에 할당할 수 있다
 - 스테이트 규칙에 따른 클래스 이름은 모두 `is-` 접두사를 붙인다
 - 기존 스타일을 모두 덮어써서 상태 스타일을 반영하는 것을 기대하기 때문에 필요한 경우에는 !important 사용도 권장
 
 <!--
-  - 어떤 모듈에 적용하는지를 명확하게 하기 위해서 상태 스타일에 모듈 이름을 포함시킬 것을 권장하고 있습니다.
+다음은 스테이트 규칙입니다. 스테이트 규칙은 기존 스타일을 덮어쓰거나 확장하기 위해 사용합니다. 레이아웃, 모듈과 스테이트를 구분하는 쉬운 방법은 스테이트는 자바스크립트에 의존한다는 점입니다.
+
+탭1 탭2 탭3 탭4가 있는 이러한 모듈에서, 각 탭을 클릭하면 배경색이 파란색으로 바뀐다고 가정해보겠습니다. 탭이 클릭되었을 때 자바스크립트의 click event handler를 이용하여 배경색을 바꾸는 클래스를 추가한다면 이러한 클래스가 바로 스테이트 규칙에 해당하는 css 코드입니다.
+
+스테이트는 레이아웃, 모듈 모두에 할당할 수 있습니다.
+
+스테이트의 이름에 is 접두사를 붙여서 다른 규칙과 구별하며, 어떤 모듈에 적용하는지를 명확하게 하기 위해서 스테이트의 이름에 모듈 이름을 포함시킬 것을 권장하고 있습니다.
+
+또한 기존 스타일을 모두 덮어써서 상태 스타일을 반영하는 것을 기대하기 때문에 필요한 경우에는 !important 사용도 권장하고 있습니다.
  -->
 
-## 7-6. 테마 규칙
+## 5-6. 테마(Theme) 규칙
 
 - 사이트 내 레이아웃이나 색상, 텍스트 처리 등을 일정한 규칙에 따라 덮어쓰는 것
 
@@ -434,11 +518,18 @@ a:hover {
 
 - 예시) 다크모드 전환, 테마 컬러 변경 등
 
-## 7-7. SMACSS 정리
+- `theme` 접두사를 붙일 것을 권장
+
+<!-- 마지막 규칙은 테마 규칙입니다. 테마 규칙은 사이트 내 레이아웃이나 색상, 테스트 처리 등을 일정한 규칙에 따라 덮어쓰는 것으로서, 기존의 다양한 스타일링이 덮어쓰기의 대상이 됩니다. 테마 규칙은 다크모드 전환을 떠올리면 이해하기 쉽습니다.
+  -->
+
+## 5-7. SMACSS 정리
 
 - 프로젝트에서 고려해야 하는 대부분의 CSS 규칙을 포함
 
 - 각 규칙이 엄격하지 않아 유연하나, 경우에 따라 규칙이 너무 유연하여 실제 코드의 지침으로 삼기 어려움
+
+- 모듈 규칙에 OOCSS를 적용하거나 다음에 설명할 BEM의 규칙을 일부 적용하는 등 다른 설계 기법과 조합하는 경우가 많다
 
 <!--
 SMACSS는 프로젝트에서 고려해야 하는 대부분의 CSS 규칙을 가지고 있습니다.
@@ -450,30 +541,32 @@ SMACSS는 프로젝트에서 고려해야 하는 대부분의 CSS 규칙을 가�
 그때는 모듈 규칙에 OOCSS를 적용하거나 뒤에서 설명할 BEM의 규칙을 일부 적용하는 등 다른 설계 기법과 조합하는 경우도 많습니다.
  -->
 
-# 8. BEM
+# 6. BEM
 
-## 8-1. BEM이란?
+<!-- 다음으로 말씀드릴 CSS 방법론은 BEM입니다. -->
+
+## 6-1. BEM이란?
 
 - Block, Element, Modifier
 - 러시아의 Yandex 사가 제창한 컴포넌트 기반 웹 개발 접근법
-- 사용자 인터페이스를 독립된 블록으로 분리함으로써 복잡한 페이지에서도 간단하고 신속하게 개발을 수행하는 것을 목적으로 함
+- UI를 독립된 블록으로 분리함으로써 복잡한 페이지에서도 간단하고 신속하게 개발을 수행하는 것이 목적
 - 기본적으로는 모듈 기반의 방법이지만，그 내용이 다른 설계 기법에 비해 엄격하고 강력하여 세계적으로 이름이 알려졌으며 실제로 널리 사용되고 있다
 
-<!-- - 모듈을 Block, Element, Modifier 단위로 분해 및 정의합니다.
-- UI를 독립적인 block으로 나눈다.
- -->
+<!-- BEM은 Block, Element, Modifier의 머리글자로서, 러시아의 Yandex 사가 제창한 컴포넌트 기반 웹 개발 접근법입니다.
+UI를 독립된 블록으로 분리함으로써 복잡한 페이지에서도 간단하고 신속하게 개발을 수행하는 것을 목적으로 합니다.
+기본적으로는 모듈 기반의 방법이지만，그 내용이 다른 설계 기법에 비해 엄격하고 강력하여 세계적으로 이름이 알려졌으며 실제로 널리 사용되고 습니다.
+-->
 
-## 8-2. Block
+## 6-2. Block
 
 - 재사용할 수 있는 기능적으로 독립적인 페이지 구성요소
 
-- HTML에서 블록은 클래스 속성으로 나타낸다
+- BEM을 사용할 때는 ID 셀렉터 또는 요소 셀렉터를 사용하면 안 됩니다.
 
 - Block 이름은 상태(`state`)가 아닌 용도(`purpose`)를 나타낸다
-  - ✅ "What is it?" — menu or button
-  - ❌ "What does it look like?" — red or big
 
----
+  - ✅ "이것은 무엇인가?" — menu or button
+  - ❌ "이것은 어떻게 생겼는가?" — red or big
 
 ```html
 <!-- ✅ error 블록은 시맨틱한 의미를 가지고 있습니다.  -->
@@ -483,18 +576,16 @@ SMACSS는 프로젝트에서 고려해야 하는 대부분의 CSS 규칙을 가�
 <div class="red-text"></div>
 ```
 
-- Block은 환경에 영향을 미치지 않아야 합니다. 즉, 외부 지오메트리(margin) 또는 Block의 위치(position)를 설정하지 않아야 합니다.
+<!-- 먼저 Block에 대해 살펴보겠습니다. Block은 재사용할 수 있는 기능적으로 독립된 페이지 구성요소입니다. HTML에서 Block은 클래스 속성으로 나타냅니다. 즉, CSS에서는 클래스 셀렉터를 사용합니다.
+상세도를 가능한 균일하게 유지하려는 것이며, 뒤에서 설명할 Modifier나 Mix를 사용한 덮어쓰기를 쉽게 하기 위해서입니다. 그러므로 HTML에 여러 클래스가 붙어 있는 경우에도 상세도는 균일하게 유지하도록 합니다.
+이렇게 하면 블록을 재사용하거나 다른 위치로 이동하는 데 필요한 독립성이 보장됩니다.
+이는 Block에만 국한된 내용이 아니며, BEM에서는 클래스 셀렉터만 사용한다고 생각하셔도 무방합니다.
 
-- BEM을 사용할 때도 ID 셀렉터 또는 요소 셀렉터를 사용하면 안 됩니다.
-
-<!--   상세도를 가능한 균일하게 유지하려는 것이며, 뒤에서 설명할 Modifier나 Mix를 사용한 덮어쓰기를 쉽게 하기 위해서입니다. 그러므로 HTML에 여러 클래스가 붙어 있는 경우에도 상세도는 균일하게 유지하도록 합니다.
-  이렇게 하면 블록을 재사용하거나 다른 위치로 이동하는 데 필요한 독립성이 보장됩니다. -->
+ Block이름은 상태가 아닌 용도를 나타냅니다.  -->
 
 ---
 
-- Block들은 서로 중첩될 수 있습니다.
-
-<!-- 몇 겹의 중첩된 블록 레벨을 가질 수 있습니다. -->
+- Block은 환경에 영향을 미치지 않아야 합니다. 즉, Block 자체에 대한 외부 지오메트리(`margin`) 또는 Block의 위치(`position`)를 설정하지 않아야 합니다.
 
 ```html
 <!-- `header` block -->
@@ -507,14 +598,31 @@ SMACSS는 프로젝트에서 고려해야 하는 대부분의 CSS 규칙을 가�
 </header>
 ```
 
-## Elements
+<!--
+Block은 환경에 영향을 미치지 않아야 합니다. 즉, Block 자체에 대한 외부 지오메트리(margin) 또는 Block의 위치(position)를 설정하지 않아야 합니다. Block 자체에 대한 margin, position 을 설정하면, 외부의 환경에 의존적이게 되어 기능적으로 독립적이어야 한다는 Block의 정의를 맞지 않게 됩니다.
 
-- Block의 복합 부품으로 Block과 별도로 사용할 수 없습니다.
+ -->
+
+---
+
+- Block들은 서로 중첩될 수 있습니다.
+
+![Nested Structure](https://en.bem.info/kFetIbKxQdABHhUecbic45Il0Bg.png)
+
+<!-- 또한, Block들은 서로 중첩될 수 있으며, 몇 겹으로 중첩되는 것도 허용됩니다.
+
+예를 들어 head block은 logo bloc, search block, auth block 을 포함할 수 있습니다.
+
+ -->
+
+## 6-3. Element
+
+- Block의 복합 부품으로 Block과 별도로 사용할 수 없다
 
 - Element 이름은 상태(`state`)가 아닌 용도(`purpose`)를 나타낸다
 
-  - ✅ "What is this?" — item, text, etc.
-  - ❌ "What type, or what does it look like?" — red, big, etc.
+  - ✅ "이것은 무엇인가?" — item, text, etc.
+  - ❌ "이것은 어떻게 생겼는가? 어떤 타입인가?" — red, big, etc.
 
 - 명명법: `block-name__element-name`
 
@@ -529,11 +637,15 @@ SMACSS는 프로젝트에서 고려해야 하는 대부분의 CSS 규칙을 가�
 </form>
 ```
 
-  <!--
-  element의 풀네임의 구조는 block이름이 먼저오고 그다음 두개의 언더바가 온 후 element의 이름으로 이루어져 있습니다.
+<!--
+다음은 Element 입니다. Element는 Block의 복합 부품으로 Block과 별도로 사용할 수 없습니다.
 
-  예를 들어 search-form 블락의 엘레멘트인 input 과 button은  search-form 언더바 언더바 input, search-form 언더바 언더바 button으로 기재합니다.
-  -->
+Element의 이름 또한 Block과 마찬가지로 Element의 상태가 아닌 용도를 나타내게끔 지어야 합니다. 따라서, item, text는 적합한 Element 이름이지만 red, big 은 적합한 Element 이름이 아닙니다.
+
+Element의 풀네임은 block이름을 먼저 기재한 후 그다음 두개의 언더바를 기재하고 element의 이름을 기재하여야 합니다.
+
+예를 들어 search-form 블락의 엘레멘트인 input 과 button은  search-form 언더바 언더바 input, search-form 언더바 언더바 button으로 기재합니다.
+-->
 
 ---
 
@@ -541,31 +653,41 @@ SMACSS는 프로젝트에서 고려해야 하는 대부분의 CSS 규칙을 가�
 
 - 모든 Block이 Element를 가지는 것은 아니다
 
-- Element는 서로 중첩될 수 있습니다.
-  - 다만, Element는 Block의 부분이지 다른 Element의 부분이 아닙니다.
-  - Element의 이름은 `block__element1__element2` 와 같이 될 수 없습니다.
+- Element는 서로 중첩될 수 있다
+  - 다만, Element는 Block의 부분이지 다른 Element의 부분이 아니다
+  - Element의 이름은 `block__element1__element2` 와 같이 될 수 없다
 
 ```html
 <!-- ❌ Element의 이름 구조가 block-name__element-name을 따르고 있지 않음 -->
 <form class="search-form">
   <div class="search-form__content">
-    <!-- Recommended: `search-form__input` or `search-form__content-input` -->
+    <!-- 권장: `search-form__input` or `search-form__content-input` -->
     <input class="search-form__content__input" />
 
-    <!-- Recommended: `search-form__button` or `search-form__content-button` -->
+    <!-- 권장: `search-form__button` or `search-form__content-button` -->
     <button class="search-form__content__button">Search</button>
   </div>
 </form>
 ```
 
-<!-- Element를 단독으로 사용하고 싶다면 이 요소는 Element가 아니라 Block임을 의미하는 것입니다.  -->
+<!--
+lement는 항상 Block의 부분이어야 하며, Block으로부터 분리하여 사용해서는 안됩니다.
+
+Element를 단독으로 사용하고 싶다면 이 요소는 Element가 아니라 Block임을 의미하는 것입니다.  -->
 
 <!--
 - 모든 Block이 반드시 Element를 가져야 할 필요는 없습니다.
 
 어떤 Block은 Element없이 단독으로 사용됩니다. -->
 
----
+<!-- Element는 서로 중첩될 수 있지만, Element가 다른 Element의 Element가 될 수는 없습니다. Element는 항상 Block의 하위 엔티티입니다
+
+아래의 예에서 search-form__content__input, search-form__content__button 은 잘못된 Element 이름 구조입니다.
+input은 search-form__input, button은 search-form__button 등으로 하여야 합니다.
+
+-->
+
+<!-- ---
 
 - Block 이름은 해당 Element가 block에 의존적인 것을 보장하는 namespace를 정의합니다.
 
@@ -579,7 +701,7 @@ SMACSS는 프로젝트에서 고려해야 하는 대부분의 CSS 규칙을 가�
     </div>
   </div>
 </div>
-```
+``` -->
 
 <!--
 However, this block structure is always represented as a flat list of elements in the BEM methodology:
@@ -610,43 +732,74 @@ The block's structure changes, but the rules for the elements and their names re
 
 ---
 
-### Q. block을 만들어야 할까요? element를 만들어야 할까요?
+### Q. Block을 만들어야 할까요? Element를 만들어야 할까요?
 
-- 구현된 다른 페이지 컴포넌트에 의존하지 않는다면 코드가 재사용된다면 block을 만드세요
-- 부모 엔티티(block) 없이 구분해서 사용할 수 없다면 element를 만드세요.
-- 더 작은 부분으로 나뉘어져야 하는 elements의 경우, Block을 만드세요.
-  - BEM에서는 elements의 elements는 만들 수 없습니다.
+- 구현된 다른 페이지 컴포넌트에 의존하지 않고 코드가 재사용된다 → Block
+- 부모 엔티티(Block) 없이 구분해서 사용할 수 없다 → Element
+- 더 작은 부분으로 나뉘어져야 하는 Elements → Block / Mix
+  - BEM에서는 Elements의 Elements는 만들 수 없다
 
-## Modifier
+<!-- Block 과 Element를 듣고 다음과 같은 의문이 드실 수 있을 겁니다. 언제 Block을 만들고, 언제 Element를 만들어야 할까요?
+구현된 다른 페이지 컴포넌트에 의존하지 않고 코드가 재사용된다면 Block을 만들어야 합니다.
+부모 엔티티 없이 구분해서 사용할 수 없다면 Element를 만들어야 합니다. 만약 Element가 더 작은 부분으로 나눠져야 할 것 같다면 Block을 추가해야 합니다. 이러한 기법은 Mix 라고 하는데, 뒤에서 설명하도록 하겠습니다.
+
+-->
+
+## 6-4. Modifier
 
 - Block 또는 Element의 모양, 상태 또는 동작을 정의
 
 - Modifier 이름은 모양(`appearance`), 상태(`state`), 동작(`behavior`)를 나타낸다
 
-  - ✅ "What size?" or "Which theme?" and so on — size_s or theme_islands
-  - ✅ "How is it different from the others?" — disabled, focused, etc.
-  - ✅ "How does it behave?" or "How does it respond to the user?" — directions_left-top
+  - ✅ "어떤 사이즈?" or "어떤 테마?" and so on — size_s or theme_islands
+  - ✅ "어떻게 다른 것들과 다른가?" — disabled, focused, etc.
+  - ✅ "어떻게 행동할 것인가?" — directions_left-top
 
-- Modifier 는 홀로 사용되지 않습니다.
-  Modifier는 Block 또는 Element의 모양, 행동, 상태를 변경하는 것이지 대체하는 것이 아닙니다.
+- Modifier 는 홀로 사용되지 않는다
+
+<!-- BEM의 마지막 엔티티, Modifier 입니다. Modifier는 Block 또는 Element의 모양, 상태, 동작을 정의합니다.
+  Modifier 이름은 이러한 모양, 상태, 동작을 나타내도록 지어야 합니다.
+
+  Modifier는 홀로 사용되지 않습니다. Modifier는 Block 또는 Element의 모양, 행동, 상태를 변경하는 것이지 대체하는 것이 아닙니다.
+-->
 
 ---
 
-### Modifier의 타입
+### Modifier의 유형
 
-1. Boolean
+#### 1. Boolean
 
 - Modifier 유무만 중요하고 그 값이 무관할 때 사용: `disabled`, `focused`
 
 - Boolean modifier 가 있으면 해당 값이 참으로 간주됨
 
-- 명명법
-  `block-name_modifier-name`
-  `block-name__element-name_modifier-name`
+- 명명법: `block-name_modifier-name`, `block-name__element-name_modifier-name`
+
+```html
+<!--  `search-form` block은 `focused` Boolean modifier 를 가지고 있음 -->
+<form class="search-form search-form_focused">
+  <input class="search-form__input" />
+
+  <!-- `button` element 는 `disabled` Boolean modifier 를 가지고 있음-->
+  <button class="search-form__button search-form__button_disabled">
+    Search
+  </button>
+</form>
+```
+
+<!-- Modifier은 Boolean, Key-Value 의 2가지 유형이 있습니다.
+Boolean 유형은 Modifier의 유무만 중요하고 그 값이 무관할 때 사용되는 유형입니다.
+
+disabled, focused 와 같이 Modifier가 있으면 해당 값이 참으로 간주되어 사용됩니다.
+
+이 다음에 소개할 Key-Value 유형에서 value가 생략된 버젼이라고 생각하셔도 좋을 것 같습니다.
+
+Boolean 타입의 Modifier 풀네임은 block-name 또는 element-name과의 사이에 한 개의 언더바를 추가하고 modifier name을 기재합니다.
+-->
 
 ---
 
-2. Key-Value
+#### 2. Key-Value
 
 - Modifier 값이 중요한 경우에 사용: `size_s`, `theme_islands`
 
@@ -654,23 +807,49 @@ The block's structure changes, but the rules for the elements and their names re
   `block-name--modifier-name_modifier-value`
   `block-name__element-name_modifier-name_modifier-value`
 
-<!-- . 예를 들어 "섬 설계 테마가 있는 메뉴: menu_theme_islands"가 있습니다. -->
+```html
+<!--  `search-form` block 이 `islands` 값을 가진 `theme` modifier를 가지고 있음 -->
+<form class="search-form search-form_theme_islands">
+  <input class="search-form__input" />
+
+  <!-- `button` element가 `m` 값을 가진 `size` modifier를 가지고 있음 -->
+  <button class="search-form__button search-form__button_size_m">Search</button>
+</form>
+```
+
+<!--
+
+다음은 Key-Value 유형의 Modifier 입니다. Modifer 값이 중요한 경우에 사용합니다. `size_s`의 경우 key가 size, value 가 s에 해당하여 size는 s를 나타냅니다.
+ -->
 
 ---
 
-### MindBEMding
+```html
+<!-- ❌ 동일한 유형의 Modifier를 동시에 사용할 수 없음-->
+<form class="search-form search-form_theme_islands search-form_theme_lite">
+  <input class="search-form__input" />
+
+  <button
+    class="search-form__button search-form__button_size_s search-form__button_size_m"
+  >
+    Search
+  </button>
+</form>
+```
+
+---
+
+### ※ MindBEMding
 
 - Modifier 전후의 구분 문자를 언더바 한 개에서 하이픈 두 개로 변경한 스타일
 
-`block-name--modifier-name`
-`block-name__element-name--modifier-name`
-`block-name--modifier-name--modifier-value`
-`block-name__element-name--modifier-name--modifier-value`
+  `block-name--modifier-name`
+  `block-name__element-name--modifier-name`
+  `block-name--modifier-name--modifier-value`
+  `block-name__element-name--modifier-name--modifier-value`
 
-<!-- 지금까지 설명드린 Modifier의 명명법은 Block 또는 Element 이름과 하나의 언더바로 구분하였습니다. 하지만, MindBEMDing 이라는 블로그 기사에서 유명해진 하이픈 두 개를 사용하는 스타일도 소개드리겠습니다. 기본적인 규칙은 동일하며,
-Modifier 전후의 구분 문자를 언더바 한 개에서 하이픈 두 개로 변경한 스타일입니다.
-
-이후의 Modifier는 모두 MindBEMding 방식을 따라서 표기하였음을 말씀드립니다.
+<!-- 지금까지 설명드린 Modifier의 명명법은 Block 또는 Element 이름과 하나의 언더바로 구분하였습니다. 하지만, MindBEMDing 이라는 블로그 기사에서 유명해진 하이픈 두 개를 사용하는 스타일도 소개드리겠습니다. 기본적인 규칙은 동일하며, Modifier 전후의 구분 문자를 언더바 한 개에서 하이픈 두 개로 변경한 스타일입니다.
+이후의 Modifier는 모두 MindBEMding 방식을 따라서 표기하였습니다.
  -->
 
 <!-- ### Why include the block name in modifier and element names?
@@ -679,7 +858,7 @@ Modifier 전후의 구분 문자를 언더바 한 개에서 하이픈 두 개로
 - Allows the use of mixes.
 - This makes searching in the code easier. -->
 
-## Mix
+## 6-5. Mix
 
 - Block과 Element가 하나의 HTML 요소에 존재하는 것을 의미
 
@@ -687,49 +866,74 @@ Modifier 전후의 구분 문자를 언더바 한 개에서 하이픈 두 개로
 
 - 기존 BEM 엔티티를 기반으로 의미상 새로운 인터페이스 컴포넌트를 작성
 
+- 가급적 상세도를 높이지 않고 Block의 독립성을 유지할 수 있음
+
 ```html
 <!-- `header` block -->
 <div class="header">
-  <!--
-        The `search-form` block is mixed with the `search-form` element
-        from the `header` block
-    -->
+  <!-- `search-form` block 은 `search-form` element 와 `header` block 으로 mix 됨 -->
   <div class="search-form header__search-form"></div>
 </div>
 ```
 
 <!--
-Mix를 사용하면 코드 중복을 피하면서 여러 BEM 엔티티의 동작과 스타일을 결합할 수 있습니다
+Mix는 Block과 Element가 하나의 HTML 요소에 존재하는 것을 의미합니다.
+코드 중복을 피하면서 여러 BEM 엔티티의 동작과 스타일을 결합하여, 기존 BEM 엔티티를 기반으로 의미상 새로운 인터페이스 컴포넌트를 작성하기 위하여 사용합니다.
+
+Mix의 장점으로는 가급적 상세도를 높이지 않고 Block의 독립성을 유지할 수 있는 점을 꼽을 수 있습니다.
+
+아래의 예제에서 search-form block은 header block으로부터 search-form element가 mix 되어, header__search-form elemnt가 추가된 것을 알 수 있습니다.
+
+예제에서는 Block 과 Element의 Mix만 기재하였지만, Block과 Block, Element와 Element의 Mix도 가능합니다.
+
  -->
 
-# 9. 새로운 CSS 방법론
+# 7. 새로운 CSS 방법론
 
-### 기존 CSS 방법론의 문제점
+<!-- 다음으로 새로운 CSS 방법론입니다.  -->
 
-- OOCSS, SMACSS: Separation of Concern
-  CSS가 HTML 구조와 강하게 결합되어 있다.
-  CSS가 HTML에 의존한다 예: 요소 셀렉터
+## 7-1. 기존 CSS 방법론의 문제점
 
-- BEM: Mixing Concerns
-  HTML이 CSS에 의존한다.
-  CSS Block, Element에 맞추어서 HTML 마크업을 진행하게 된다
+- CSS가 HTML 구조와 강하게 결합되어 있다
 
----
+- HTML에 의존하는 CSS
 
-### Utility-First CSS / Functional CSS
+  - HTML에서 스타일이 필요한 요소에 클래스명을 부여
+  - 클래스명이 부여된 요소에 대하여 CSS에서 스타일링
 
-- ❌: 시멘틱하고 컨텍스트에 의존하지 않는 CSS 작성
+- CSS에 의존하는 HTML
 
-- ✅: 각각의 CSS를 마치 유틸 함수처럼 생각
+  - CSS에서 HTML과 독립적으로 스타일을 선언
+  - HTML에서는 선언되어 있는 스타일에 한하여 마크업 작성
 
-- 단 하나의 속성과 값을 나타내는 CSS를 사전에 미리 정의하고, 해당 CSS를 HTML에서 바로 조합해서 사용
+<!-- 지금까지 말씀드린 OOCSS, SMACSS, BEM 은 비교적 역사가 오래된 CSS 방법론입니다.
+이러한 CSS 방법론은 각자의 방법으로 유지보수가 용이한 CSS 설계 방법을 제시하였습니다.
+그러나 여전히 문제점이라고 볼 부분이 남아 있습니다.
 
----
+바로 CSS가 HTML 구조와 강하게 결합되어 있다는 점입니다.
+
+
+HTML에 의존하는 CSS는 OOCSS, SMACSS , CSS에 의존하는 HTML은 BEM 이 가깝다고 볼 수 있습니다.
+ -->
+
+## 7-2. Utility-First CSS / Functional CSS
+
+- 시멘틱하고 컨텍스트에 의존하지 않는 CSS 작성 ❌
+
+- 클래스명만 보아도 CSS 속성과 값을 바로 유추할 수 있도록 단 하나의 속성과 값을 나타내는 CSS를 사전에 미리 정의
+
+- 미리 정의된 클래스를 마치 HTML 요소에 제공하는 API로 생각하여 API(클래스명)을 HTML에서 조합해서 사용
 
 ```html
 <!-- index.html -->
 <button class="w-1/2 rounded-md border border-gray-300">Button</button>
 ```
+
+<!-- 이러한 기존의 CSS 방법론에 대한 문제점을 해결하기 위하여 Utility-First CSS 라는 방법론이 대두되었습니다. Utility-First CSS에서는 더이상 시멘틱하고 컨텍스트에 의존하지 않는 CSS 작성하려고 하지 않습니다. 클래스명만 보아도 CSS 속성과 값을 바로 유추할 수 있도록 단 하나의 속성과 값을 나타내는 CSS를 사전에 미리 정의해두고, 미리 정의된 클래스를 마치 HTML 요소에 제공하는 API로 생각하여 API(클래스명)을 HTML에서 조합해서 사용합니다.
+이를 바탕으로 작성한 버튼 모듈입니다. 클래스명만 보아도 대충 어떤 스타일일지 감이 오시나요?
+ -->
+
+---
 
 ```css
 /* index.css */
@@ -750,21 +954,30 @@ Mix를 사용하면 코드 중복을 피하면서 여러 BEM 엔티티의 동작
 }
 ```
 
+<!-- 각 클래스명에 대응되는 스타일은 다음과 같습니다 -->
+
 ---
 
 ### inline style과 다른점
 
-- 아무 값이나 고를 수 있는게 아니다. 사전에 정해진 리스트에서 골라야 하므로 전체적인 일관성을 높일 수 있다.
-- hover, focus 등도 사용할 수 있다.
+- 아무 값이나 지정할 수 있는게 아니다. 사전에 정해진 리스트에서 골라야 하므로 전체적인 일관성을 높일 수 있다.
+- hover, focus 등의 의사 클래스 셀렉터도 사용할 수 있다.
 - media query를 사용할 수 있어 반응형 디자인에 대응이 수월하다.
 
-## Utility-First CSS 예시
+<!-- 혹자는 CSS가 등장하기전 inline style과 다른 점이 뭐냐고 물어보실 수 있을 것 같습니다.
+
+inline style과 다른점은, 아무 값이나 지정할 수 있는 것이 아닙니다. 사전에 정해진 스타일 내에서 골라야 하므로 일관된 스타일링을 할 수 있습니다. 또한, inline style에서 사용할 수 없는 hover, focus 등의 의사 클래스 셀렉터, media query를 사용할 수 있어 더욱 풍부하게 스타일링할 수 있습니다.
+  -->
+
+## 7-3. 널리 알려진 Utility-First CSS
 
 - Tailwind CSS
 - Tachyons
 - Atomic CSS
 
-## State Of CSS 2020
+---
+
+### ※ State Of CSS 2020
 
 ![css-methodologies-sat](assets/img/css-methodologies-sat.png)
 
@@ -776,7 +989,7 @@ Mix를 사용하면 코드 중복을 피하면서 여러 BEM 엔티티의 동작
 
 ![최다 적용 기술](assets/img/최다_적용_기술.png)
 
-# 10. Reference
+# 8. Reference
 
 - CSS 설계 실전 가이드 - 한다 아츠시
 - [Object-Oriented CSS](http://oocss.org/)
@@ -786,4 +999,4 @@ Mix를 사용하면 코드 중복을 피하면서 여러 BEM 엔티티의 동작
 - [MindBEMding – getting your head ’round BEM syntax](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
 - [state of CSS 2020](https://2020.stateofcss.com/ko-KR/)
 
-# 11. Any Questions?
+# 9. Any Questions?
